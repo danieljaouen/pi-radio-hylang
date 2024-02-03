@@ -1,14 +1,9 @@
 (require hyrule [assoc defmain])
-(import logging)
 (import os)
 (import subprocess)
-(import sys)
 (import flask [Flask redirect render-template request url-for])
 (import flask-sqlalchemy [SQLAlchemy])
 (import flask-migrate [Migrate])
-
-(.addHandler (logging.getLogger) (logging.StreamHandler))
-(.setLevel (logging.getLogger) logging.INFO)
 
 (setv app (Flask __name__))
 (setv path (os.path.join (os.path.expanduser "~/dbs") "development.db"))
