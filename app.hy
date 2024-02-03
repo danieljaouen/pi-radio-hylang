@@ -1,4 +1,4 @@
-(require hyrule [assoc defmacro/g!])
+(require hyrule [assoc])
 (import logging)
 (import os)
 (import subprocess)
