@@ -49,14 +49,16 @@
   (setv streams (Stream.query.order_by Stream.name))
   (setv currently-playing None)
   (for [stream streams]
-    (when (.currently-playing stream)
-      (setv currently-playing stream)
-      (break)))
+    (if stream.currently-playing
+        (do
+          (setv currently-playing stream)
+          (break))
+        (setv currently-playing None)))
   (setv none-selected True)
   (when currently-playing
     (setv none-selected False))
 
   (render_template "index.html"
-                   #** {streams streams
-                        currently-playing currently-playing
-                        none-selected none-selected}))
+                   #** {"streams" streams
+                        "currently_playing" currently-playing
+                        "none_selected" none-selected}))

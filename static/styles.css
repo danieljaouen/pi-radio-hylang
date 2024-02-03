@@ -1,0 +1,8 @@
+body, form, table, ul {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.jumbotron {
+  text-align: center;
+}
