@@ -57,9 +57,6 @@
     (setv none-selected False))
 
   (render_template "index.html"
-                  streams streams
-                  currently-playing currently-playing
-                  none-selected none-selected))
-
-(defmain []
-  (app.run #** {"debug" True}))
+                   #** {streams streams
+                        currently-playing currently-playing
+                        none-selected none-selected}))
