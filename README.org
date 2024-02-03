@@ -5,6 +5,12 @@
   sudo apt install mpc
   #+END_SRC
 
+* Start mpd.
+
+  #+BEGIN_SRC bash
+  systemctl --user enable mpd.service
+  #+END_SRC
+
 * Install SQLite.
 
   #+BEGIN_SRC bash
