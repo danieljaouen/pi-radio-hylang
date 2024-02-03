@@ -1,4 +1,4 @@
-(require hyrule [assoc])
+(require hyrule [assoc defmain])
 (import logging)
 (import os)
 (import subprocess)
@@ -44,3 +44,22 @@
 
   (defn __repr__ [self]
     f"<Stream {self.name}>"))
+
+(defn [(app.route "/")] index []
+  (setv streams (Stream.query.order_by Stream.name))
+  (setv currently-playing None)
+  (for [stream streams]
+    (when (.currently-playing stream)
+      (setv currently-playing stream)
+      (break)))
+  (setv none-selected True)
+  (when currently-playing
+    (setv none-selected False))
+
+  (render_template "index.html"
+                  streams streams
+                  currently-playing currently-playing
+                  none-selected none-selected))
+
+(defmain []
+  (app.run #** {"debug" True}))
