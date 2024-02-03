@@ -31,9 +31,8 @@
 
 * Create the db.
 
-  #+BEGIN_SRC python
-  from app import db
-  db.create_all()
+  #+BEGIN_SRC bash
+  ./make-migrations
   #+END_SRC
 
 * `chmod` the `main.py` file.
