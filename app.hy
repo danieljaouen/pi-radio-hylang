@@ -3,7 +3,7 @@
 (import os)
 (import subprocess)
 (import sys)
-(import flask [Flask redirect render_template request url_for])
+(import flask [Flask redirect render-template request url-for])
 (import flask-sqlalchemy [SQLAlchemy])
 (import flask-migrate [Migrate])
 
@@ -58,7 +58,42 @@
   (when currently-playing
     (setv none-selected False))
 
-  (render_template "index.html"
+  (render-template "index.html"
                    #** {"streams" streams
                         "currently_playing" currently-playing
                         "none_selected" none-selected}))
+
+(defn [(app.route "/play" :methods ["POST"])] play []
+  (when (get request.form "stream")
+    (do
+      (print "got here 2")
+      (setv stream-id (int (get request.form "stream")))
+      (setv stream (Stream.query.get-or-404 stream-id))
+      (setv submitted (get request.form "submit"))
+
+      (when (and submitted (not stream.currently-playing))
+          (do
+            (setv streams (Stream.query.all))
+            (for [stream_ streams]
+              (setv stream_.currently-playing False))
+
+            (db.session.commit)
+
+            (subprocess.call ["mpc" "clear"])
+            (subprocess.call ["mpc" "add" stream.url])
+            (subprocess.call ["mpc" "play"])
+
+            (setv stream.currently-playing True)
+            (db.session.commit)))))
+
+  (return (redirect (url-for "index"))))
+
+(defn [(app.route "/stop" :methods ["POST"])] stop []
+  (setv streams (Stream.query.all))
+  (for [stream streams]
+    (setv stream.currently-playing False))
+
+  (db.session.commit)
+  (subprocess.call ["mpc" "stop"])
+
+  (return (redirect (url-for "index"))))
