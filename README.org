@@ -1,0 +1,49 @@
+* Install MPD and MPC.
+
+  #+BEGIN_SRC bash
+  sudo apt install mpd
+  sudo apt install mpc
+  #+END_SRC
+
+* Install SQLite.
+
+  #+BEGIN_SRC bash
+  sudo apt install sqlite
+  #+END_SRC
+
+* pip install hy, flask, & flask-sqlalchemy
+
+  #+BEGIN_SRC bash
+  python -m pip install hy flask flask-sqlalchemy
+  #+END_SRC
+
+* Clone down the repository.
+
+  #+BEGIN_SRC bash
+  git clone https://github.com/danieljaouen/pi-radio.git
+  #+END_SRC
+
+* Create the dbs directory.
+
+  #+BEGIN_SRC bash
+  mkdir -p ~/dbs
+  #+END_SRC
+
+* Create the db.
+
+  #+BEGIN_SRC python
+  from app import db
+  db.create_all()
+  #+END_SRC
+
+* `chmod` the `main.py` file.
+
+  #+BEGIN_SRC bash
+  chmod u+x ./main.py
+  #+END_SRC
+
+* Run the app.
+
+  #+BEGIN_SRC bash
+  FLASK_ENV=development ./main.py
+  #+END_SRC
