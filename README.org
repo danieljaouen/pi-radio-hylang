@@ -20,10 +20,10 @@ In particular, `main.py` and `make-migrations`.
   sudo apt install sqlite
   #+END_SRC
 
-* pip install hy, flask, flask-sqlalchemy, & flask-migrate
+* pip install hy, hyrule, flask, flask-sqlalchemy, & flask-migrate
 
   #+BEGIN_SRC bash
-  python -m pip install hy flask flask-sqlalchemy flask-migrate
+  python -m pip install hy hyrule flask flask-sqlalchemy flask-migrate
   #+END_SRC
 
 * Clone down the repository.
