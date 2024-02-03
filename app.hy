@@ -1,4 +1,4 @@
-(require hyrule [assoc])
+(require hyrule [assoc as->])
 (import os)
 (import subprocess)
 (import flask [Flask redirect render-template request url-for])
@@ -6,7 +6,9 @@
 (import flask-migrate [Migrate])
 
 (setv app (Flask __name__))
-(setv path (os.path.join (os.path.expanduser "~/dbs") "development.db"))
+(setv path (as-> "~/dbs" it
+                 (os.path.expanduser it)
+                 (os.path.join it "development.db")))
 (assoc app.config "SQLALCHEMY_DATABASE_URI" f"sqlite:///{path}")
 (assoc app.config "SQLALCHEMY_TRACK_MODIFICATIONS" False)
 (setv db (SQLAlchemy app))
