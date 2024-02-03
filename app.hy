@@ -67,11 +67,12 @@
   (when (get request.form "stream")
     (do
       (print "got here 2")
-      (setv stream-id (int (get request.form "stream")))
+      (setv stream-id (int (request.form.get "stream")))
       (setv stream (Stream.query.get-or-404 stream-id))
-      (setv submitted (get request.form "submit"))
+      (setv submitted (request.form.get "submit"))
+      (setv deleted (request.form.get "delete"))
 
-      (when (and submitted (not stream.currently-playing))
+      (if (and submitted (not stream.currently-playing))
           (do
             (setv streams (Stream.query.all))
             (for [stream_ streams]
@@ -84,7 +85,16 @@
             (subprocess.call ["mpc" "play"])
 
             (setv stream.currently-playing True)
-            (db.session.commit)))))
+            (db.session.commit))
+
+          (when deleted
+            (do
+              (when stream.currently-playing
+                (subprocess.call ["mpc" "clear"])
+                (subprocess.call ["mpc" "stop"]))
+
+              (db.session.delete stream)
+              (db.session.commit))))))
 
   (return (redirect (url-for "index"))))
 
@@ -95,5 +105,14 @@
 
   (db.session.commit)
   (subprocess.call ["mpc" "stop"])
+
+  (return (redirect (url-for "index"))))
+
+(defn [(app.route "/create" :methods ["GET" "POST"])] create []
+  (setv stream-name (get request.form "stream_name"))
+  (setv stream-url (get request.form "stream_url"))
+  (setv stream (Stream :name stream-name :url stream-url :currently-playing False))
+  (db.session.add stream)
+  (db.session.commit)
 
   (return (redirect (url-for "index"))))
