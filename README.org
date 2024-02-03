@@ -23,7 +23,7 @@ In particular, `main.py` and `make-migrations`.
 * pip install hy, flask, & flask-sqlalchemy
 
   #+BEGIN_SRC bash
-  python -m pip install hy flask flask-sqlalchemy
+  python -m pip install hy flask flask-sqlalchemy flask-migrate
   #+END_SRC
 
 * Clone down the repository.
