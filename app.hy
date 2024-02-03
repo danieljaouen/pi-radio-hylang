@@ -63,7 +63,6 @@
 (defn [(app.route "/play" :methods ["POST"])] play []
   (when (request.form.get "stream")
     (do
-      (print "got here 2")
       (setv stream-id (int (request.form.get "stream")))
       (setv stream (Stream.query.get-or-404 stream-id))
       (setv submitted (request.form.get "submit"))
