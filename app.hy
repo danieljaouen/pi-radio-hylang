@@ -59,7 +59,7 @@
                         "none_selected" none-selected}))
 
 (defn [(app.route "/play" :methods ["POST"])] play []
-  (when (get request.form "stream")
+  (when (request.form.get "stream")
     (do
       (print "got here 2")
       (setv stream-id (int (request.form.get "stream")))
@@ -104,8 +104,8 @@
   (return (redirect (url-for "index"))))
 
 (defn [(app.route "/create" :methods ["GET" "POST"])] create []
-  (setv stream-name (get request.form "stream_name"))
-  (setv stream-url (get request.form "stream_url"))
+  (setv stream-name (request.form.get "stream_name"))
+  (setv stream-url (request.form.get "stream_url"))
   (setv stream (Stream :name stream-name :url stream-url :currently-playing False))
   (db.session.add stream)
   (db.session.commit)
