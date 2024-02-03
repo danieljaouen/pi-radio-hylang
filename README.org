@@ -41,6 +41,7 @@ In particular, `main.py` and `make-migrations`.
 * Create the db.
 
   #+BEGIN_SRC bash
+  chmod u+x ./make-migrations
   ./make-migrations
   #+END_SRC
 
