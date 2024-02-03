@@ -20,7 +20,7 @@ In particular, `main.py` and `make-migrations`.
   sudo apt install sqlite
   #+END_SRC
 
-* pip install hy, flask, & flask-sqlalchemy
+* pip install hy, flask, flask-sqlalchemy, & flask-migrate
 
   #+BEGIN_SRC bash
   python -m pip install hy flask flask-sqlalchemy flask-migrate
