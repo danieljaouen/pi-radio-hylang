@@ -1,4 +1,4 @@
-(require hyrule [assoc defmain])
+(require hyrule [assoc])
 (import os)
 (import subprocess)
 (import flask [Flask redirect render-template request url-for])
