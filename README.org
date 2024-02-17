@@ -1,6 +1,10 @@
 This repository takes inspiration from [[https://github.com/reidwagner/hy-flask-rest-app][this repo]].
 In particular, `main.py` and `make-migrations`.
 
+I tried to be as generic as possible while creating these installation
+instructions, but, of course, things may differ depending on your distro and
+python3 installations. Please use your common sense when following them. ;)
+
 * Install MPD and MPC.
 
   #+BEGIN_SRC bash
